@@ -4,3 +4,5 @@ djangorestframework
 django-cors-headers
 djangorestframework-simplejwt
 django-environ
+black
+django-debug-toolbar
