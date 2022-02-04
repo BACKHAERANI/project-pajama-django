@@ -88,12 +88,13 @@ WSGI_APPLICATION = 'redanse.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
-        'NAME': 'redanse',
+        # mariadb setting
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'redanse',  # DB 이름
         'USER': 'root',
-        'PASSWORD': '1234', # mariaDB 설치 시 입력한 root 비밀번호 입력
+        'PASSWORD': '1234',
         'HOST': 'localhost',
-        'PORT': ''
+        'PORT': '3306'
     }
 }
 
