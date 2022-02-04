@@ -6,3 +6,4 @@ djangorestframework-simplejwt
 django-environ
 black
 django-debug-toolbar
+mysqlclient
