@@ -43,6 +43,11 @@ INSTALLED_APPS = [
     'user',
     'notice',
     'clothes',
+    'cart',
+    'community',
+    'payment',
+    'review',
+    'qna',
 ]
 
 if DEBUG:
