@@ -1,3 +1,7 @@
 from django.contrib import admin
+from qna.models import Qna
 
-# Register your models here.
+
+@admin.register(Qna)
+class QnaAdmin(admin.ModelAdmin):
+    pass
