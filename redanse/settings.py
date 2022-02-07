@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'user',
     'notice',
+    'clothes',
 ]
 
 if DEBUG:
