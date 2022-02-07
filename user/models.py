@@ -14,7 +14,7 @@ class User(models.Model):
         ("기타", "기타"),
      )
 
-    user_id = models.CharField(max_length=18, unique=True, validators=[
+    user_id = models.CharField(max_length=18, primary_key=True, validators=[
             MinLengthValidator(6),
             RegexValidator(regex='^[a-zA-Z0-9]*$'),
         ],)
@@ -38,6 +38,6 @@ class User(models.Model):
         return self.user_id
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["-user_signupdate"]
 
 
