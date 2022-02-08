@@ -4,7 +4,7 @@ from payment.models import Payment_detail
 
 
 class Review(models.Model):
-    payment_detail_num = models.ForeignKey(Payment_detail)
+    payment_detail_num = models.ForeignKey(Payment_detail, on_delete=models.CASCADE)
     score = models.PositiveSmallIntegerField(
         validators=[
             MaxValueValidator(10),
