@@ -22,4 +22,4 @@ class Review(models.Model):
         return self.title
 
     class Meta:
-        ordering = ["-clothes_num"]
+        ordering = ["-payment_detail_num"]
