@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -160,6 +159,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'user.User'
+
+
+# django-rest-framework
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+    # default 만료시간: 7시간
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=7),
+}
 
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'user_id',
