@@ -167,11 +167,13 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    # default 만료시간: 7시간
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=7),
+
+
 }
 
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'user_id',
+    # default 만료시간: 7시간
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=7),
 }
 
