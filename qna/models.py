@@ -4,7 +4,7 @@ from user.models import User
 
 class Qna(models.Model):
     qna_num = models.BigAutoField(primary_key=True)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
     content = models.TextField()
     answer = models.TextField(blank=True)
     img = models.ImageField(upload_to="redanse/QNA/%Y/%m/%d/%H/%M/%S", blank=True)

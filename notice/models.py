@@ -4,7 +4,7 @@ from user.models import User
 
 class Notice(models.Model):
     notice_num = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
     content = models.TextField()
     img1 = models.ImageField(upload_to="redanse/notice/%Y/%m/%d/%H/%M/%S", blank=True)
     img2 = models.ImageField(upload_to="redanse/notice/%Y/%m/%d/%H/%M/%S", blank=True)
