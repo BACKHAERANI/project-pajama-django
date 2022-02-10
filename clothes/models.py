@@ -4,8 +4,15 @@ from django.db import models
 class Clothes(models.Model):
     clothes_num = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
-    category = models.IntegerField(choices=[
-        (0, "TOP"), (1, "BLOUSE & SHIRT"), (2, "DRESS"), (3, "PANTS"), (4, "SKIRT"), (5, "OUTER"), (6, "ACC & CAP")])
+    category = models.CharField(max_length=18, choices=[
+        ("TOP", "TOP"),
+        ("BLOUSE & SHIRT", "BLOUSE & SHIRT"),
+        ("DRESS", "DRESS"),
+        ("PANTS", "PANTS"),
+        ("SKIRT", "SKIRT"),
+        ("OUTER", "OUTER"),
+        ("ACC & CAP", "ACC & CAP")],
+                                blank=True)
     price = models.IntegerField()
     region = models.CharField(max_length=30)
     content = models.TextField()
