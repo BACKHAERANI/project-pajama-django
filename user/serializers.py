@@ -35,11 +35,10 @@ class UserCreationSerializer(serializers.ModelSerializer):
         user_birth = validated_data["user_birth"]
         user_tel = validated_data["user_tel"]
         user_genre = validated_data.get("user_genre", "")
-        user_auth = validated_data.get("user_auth", "")
-        user_type = validated_data.get("user_type", "")
+
 
         new_user = User(user_id=user_id, username=username, user_nickname=user_nickname, user_tel=user_tel, user_birth=user_birth,
-                        user_genre=user_genre, user_auth=user_auth, user_type=user_type)
+                        user_genre=user_genre)
         new_user.set_password(password)
         new_user.save()
         return new_user
