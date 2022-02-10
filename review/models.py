@@ -4,12 +4,12 @@ from payment.models import Payment_detail
 
 
 class Review(models.Model):
-    payment_detail_num = models.ForeignKey(Payment_detail, on_delete=models.CASCADE)
+    payment_detail_num = models.ForeignKey(Payment_detail, primary_key=True, on_delete=models.CASCADE)
     score = models.PositiveSmallIntegerField(
         validators=[
             MaxValueValidator(10),
         ])
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
     content = models.TextField()
     img1 = models.ImageField(upload_to="redanse/review/%Y/%m/%d/%H/%M/%S", blank=True)
     img2 = models.ImageField(upload_to="redanse/review/%Y/%m/%d/%H/%M/%S", blank=True)
