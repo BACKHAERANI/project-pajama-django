@@ -7,6 +7,8 @@ from rest_framework_simplejwt.serializers import (
     TokenRefreshSerializer as OriginTokenRefreshSerializer,
 )
 
+from notice.serializers import NoticeSerializer
+
 User = get_user_model()
 
 
@@ -43,6 +45,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
         new_user.save()
         return new_user
 
+
 class TokenObtainPairSerializer(OriginTokenObtainPairSerializer):
     def validate(self, attrs):
         data: Dict = super().validate(attrs)
@@ -51,5 +54,15 @@ class TokenObtainPairSerializer(OriginTokenObtainPairSerializer):
         data["is_staff"] = self.user.is_staff
         return data
 
+
 class TokenRefreshSerializer(OriginTokenRefreshSerializer):
     pass
+
+
+class UserSerializer(serializers.ModelSerializer):
+    notice_set = NoticeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ["user_id", "is_superuser",
+                  "is_staff", "username", "notice_set"]
