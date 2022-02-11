@@ -7,3 +7,4 @@ class ClothesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothes
         fields = "__all__"
+        depth = 1
