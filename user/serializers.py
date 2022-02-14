@@ -53,6 +53,7 @@ class TokenObtainPairSerializer(OriginTokenObtainPairSerializer):
         data["username"] = self.user.username
         data["user_nickname"] = self.user.user_nickname
         data["is_staff"] = self.user.is_staff
+        data["is_superuser"] = self.user.is_superuser
         return data
 
 
