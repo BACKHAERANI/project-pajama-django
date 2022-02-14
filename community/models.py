@@ -3,7 +3,7 @@ from user.models import User
 
 
 class Community(models.Model):
-    community_num = models.BigAutoField(primary_key=True)
+    community_num = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     content = models.TextField()
     img1 = models.ImageField(upload_to="redanse/community/%Y/%m/%d/%H/%M/%S", blank=True)
