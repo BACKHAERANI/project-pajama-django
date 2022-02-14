@@ -3,7 +3,7 @@ from user.models import User
 
 
 class Qna(models.Model):
-    qna_num = models.BigAutoField(primary_key=True)
+    qna_num = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     content = models.TextField()
     answer = models.TextField(blank=True)
