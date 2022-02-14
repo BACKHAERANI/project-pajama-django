@@ -10,11 +10,6 @@ class NoticePagination(PageNumberPagination):
     max_page_size = 1
 
 
-class NoticeCreateViewSet(viewsets.ModelViewSet):
-    queryset = Notice.objects.all()
-    serializer_class = NoticeCreateSerializer
-
-
 class NoticeViewSet(viewsets.ModelViewSet):
     queryset = Notice.objects.all()
     serializer_class = NoticeSerializer
@@ -28,6 +23,13 @@ class NoticeViewSet(viewsets.ModelViewSet):
             qs = qs.filter(title__icontains=query)
 
         return qs
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return NoticeCreateSerializer
+        else:
+            return NoticeSerializer
 
 
 
