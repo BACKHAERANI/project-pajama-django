@@ -24,4 +24,8 @@ class ClothesViewSet(ModelViewSet):
         if query:
             qs = qs.filter(title__icontains=query)
 
+        category = self.request.query_params.get("category", "")
+        if category:
+            qs = qs.filter(category__icontains=category)
+
         return qs
