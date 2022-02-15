@@ -12,5 +12,4 @@ router.register("qna", QnaViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    path("qna.json/", views.qna_list),
 ]
