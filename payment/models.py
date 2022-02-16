@@ -22,8 +22,8 @@ class Payment(models.Model):
 
 class Payment_detail(models.Model):
     payment_detail_num = models.AutoField(primary_key=True)
-    payment_num = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    clothes_num = models.ForeignKey(Clothes, on_delete=models.CASCADE)
+    payment_num = models.ForeignKey(Payment, on_delete=models.CASCADE, db_column='payment_num')
+    clothes_num = models.ForeignKey(Clothes, on_delete=models.CASCADE, db_column='clothes_num')
 
     def __int__(self) -> int:
         return self.payment_num
