@@ -9,8 +9,6 @@ router = DefaultRouter()
 router.register("payment", PaymentViewSet)
 router.register("payment_detail", Payment_detailViewSet)
 
-
 urlpatterns = [
-    path("api/", include(router.urls)),
     path("api/", include(router.urls)),
 ]
