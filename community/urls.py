@@ -12,5 +12,4 @@ router.register("community", CommunityViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    path("community.json/", views.community_list),
 ]
