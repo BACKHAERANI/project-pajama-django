@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView as OriginTokenObtainPairView,
     TokenRefreshView as OriginTokenRefreshView,
 )
-from user.serializers import TokenObtainPairSerializer, UserCreationSerializer, UserSerializer
+from user.serializers import TokenObtainPairSerializer, UserCreationSerializer, UserSerializer, Cart_PaymentSerializer
 
 User = get_user_model()
 
@@ -37,3 +37,13 @@ class UserList(ListAPIView):
 class UserDetail(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class Cart_PaymentList(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = Cart_PaymentSerializer
+
+
+class Cart_PaymentDetail(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class =  Cart_PaymentSerializer

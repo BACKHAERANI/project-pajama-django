@@ -7,7 +7,9 @@ from rest_framework_simplejwt.serializers import (
     TokenRefreshSerializer as OriginTokenRefreshSerializer,
 )
 
+from cart.serializers import CartSerializer
 from notice.serializers import NoticeSerializer
+from payment.serializers import PaymentSerializer
 
 User = get_user_model()
 
@@ -68,3 +70,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["user_id", "is_superuser",
                   "is_staff", "username", "notice_set"]
+
+
+class Cart_PaymentSerializer(serializers.ModelSerializer):
+    cart_set = CartSerializer(many=True, read_only=True)
+    payment_set = PaymentSerializer(many=True, read_only=True)
+
+
+    class Meta:
+        model = User
+        fields = ["user_id", "is_superuser",
+                  "is_staff", "username", "cart_set","payment_set"]
