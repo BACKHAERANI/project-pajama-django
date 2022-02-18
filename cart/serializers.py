@@ -3,6 +3,18 @@ from cart.models import Cart
 
 
 class CartSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Cart
         fields = "__all__"
+        depth = 2
+
+
+class CartCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Cart
+        fields = "__all__"
+
+
+
