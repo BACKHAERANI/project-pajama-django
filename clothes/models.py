@@ -1,5 +1,7 @@
 from django.db import models
 
+from user.models import User
+
 
 class Clothes(models.Model):
     clothes_num = models.AutoField(primary_key=True)
@@ -22,6 +24,7 @@ class Clothes(models.Model):
     img4 = models.ImageField(upload_to="redanse/clothes/%Y/%m/%d/%H/%M/%S", blank=True)
     img5 = models.ImageField(upload_to="redanse/clothes/%Y/%m/%d/%H/%M/%S", blank=True)
     registration_date = models.DateTimeField(auto_now_add=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
 
     def __str__(self) -> str:
         return self.title

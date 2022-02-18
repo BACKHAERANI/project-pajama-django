@@ -3,7 +3,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
 
 from clothes.models import Clothes
-from clothes.serializers import ClothesSerializer
+from clothes.serializers import ClothesSerializer, ClothesCreateSerializer
 
 
 class ClothesPagination(PageNumberPagination):
@@ -29,3 +29,10 @@ class ClothesViewSet(ModelViewSet):
             qs = qs.filter(category__icontains=category)
 
         return qs
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return ClothesCreateSerializer
+        else:
+            return ClothesSerializer
