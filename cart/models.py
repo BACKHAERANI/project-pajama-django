@@ -6,11 +6,19 @@ from user.models import User
 from clothes.models import Clothes
 
 
+def default_date():
+    return now()
+
+
+def default_returndate():
+    return now() + timedelta(days=1)
+
+
 class Cart(models.Model):
     cart_num = models.AutoField(primary_key=True)
     payment_status = models.IntegerField(choices=[(0, 0), (1, 1)])
-    rental_date = models.DateField(default=now)
-    return_date = models.DateField(default=now() + timedelta(days=1))
+    rental_date = models.DateField(default=default_date)
+    return_date = models.DateField(default=default_returndate)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     clothes_num = models.ForeignKey(Clothes, on_delete=models.CASCADE, db_column='clothes_num')
 
