@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import (
     TokenObtainPairView as OriginTokenObtainPairView,
@@ -9,6 +10,12 @@ from rest_framework_simplejwt.views import (
 from user.serializers import TokenObtainPairSerializer, UserCreationSerializer, UserSerializer, Cart_PaymentSerializer
 
 User = get_user_model()
+
+
+class UserPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1
 
 
 class UserAPIView(CreateAPIView):
@@ -24,6 +31,7 @@ class TokenObtainPairView(OriginTokenObtainPairView):
 class TokenRefreshView(OriginTokenRefreshView):
     pass
 
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -32,6 +40,16 @@ class UserViewSet(viewsets.ModelViewSet):
 class UserList(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    pagination_class = UserPagination
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+
+        query = self.request.query_params.get("query", "")
+        if query:
+            qs = qs.filter(user_id__icontains=query)
+
+        return qs
 
 
 class UserDetail(RetrieveAPIView):
