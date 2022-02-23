@@ -30,7 +30,7 @@ class Payment_detailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Payment_detail
-        fields = ["clothes_num", "payment_num"]
+        fields = "__all__"
         depth = 1
 
     def to_representation(self, obj):
