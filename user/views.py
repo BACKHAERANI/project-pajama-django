@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, RetrieveUpdateAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import (
@@ -35,6 +35,16 @@ class TokenRefreshView(OriginTokenRefreshView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    pagination_class = UserPagination
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+
+        query = self.request.query_params.get("query", "")
+        if query:
+            qs = qs.filter(user_id__icontains=query)
+
+        return qs
 
 
 class UserList(ListAPIView):
@@ -64,4 +74,4 @@ class Cart_PaymentList(ListAPIView):
 
 class Cart_PaymentDetail(RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class =  Cart_PaymentSerializer
+    serializer_class = Cart_PaymentSerializer
