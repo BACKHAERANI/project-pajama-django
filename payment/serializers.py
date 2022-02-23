@@ -26,10 +26,11 @@ class Payment_detailCreateSerializer(serializers.ModelSerializer):
 
 class Payment_detailSerializer(serializers.ModelSerializer):
     clothes_num = ClothesSerializer(read_only=True)
+    payment_num = PaymentSerializer(read_only=True)
 
     class Meta:
         model = Payment_detail
-        fields = ["clothes_num"]
+        fields = ["clothes_num", "payment_num"]
         depth = 1
 
     def to_representation(self, obj):
