@@ -69,7 +69,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["user_id", "is_superuser","is_staff", "username","user_nickname",
-                  "user_birth","user_tel", "user_genre","notice_set"]
+                  "user_birth","user_tel", "user_genre","notice_set", "is_active"]
 
 
 class Cart_PaymentSerializer(serializers.ModelSerializer):
