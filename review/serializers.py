@@ -2,6 +2,7 @@ from typing import Dict
 
 from rest_framework import serializers
 
+from payment.models import Payment_detail
 from payment.serializers import Payment_detailSerializer
 from review.models import Review
 
@@ -10,6 +11,18 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = "__all__"
+
+
+    def create(self, validated_data):
+        _ = validated_data.pop('payment_detail_num')
+        request = self.context.get("request")
+        payment_detail_num= request.data.get("payment_detail_num")
+
+
+        payment_detail = Payment_detail.objects.get(payment_detail_num__exact=payment_detail_num)
+        review = Review.objects.create(payment_detail_num=payment_detail, **validated_data)
+
+        return review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
