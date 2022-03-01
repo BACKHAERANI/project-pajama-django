@@ -8,6 +8,7 @@ from rest_framework_simplejwt.serializers import (
 )
 
 from cart.serializers import CartSerializer
+from clothes.serializers import ClothesSerializer
 from notice.serializers import NoticeSerializer
 from payment.serializers import PaymentSerializer
 
@@ -75,6 +76,7 @@ class UserSerializer(serializers.ModelSerializer):
 class Cart_PaymentSerializer(serializers.ModelSerializer):
     cart_set = CartSerializer(many=True, read_only=True)
     payment_set = PaymentSerializer(many=True, read_only=True)
+
 
 
     class Meta:
