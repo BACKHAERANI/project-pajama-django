@@ -15,6 +15,15 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     pagination_class = ReviewPagination
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+
+        query = self.request.query_params.get("query", "")
+        if query:
+            qs = qs.filter(payment_detail_num__clothes_num__clothes_num__iexact=query)
+
+        return qs
+
     def get_serializer_class(self):
         method = self.request.method
         if method == 'PUT' or method == 'POST':
