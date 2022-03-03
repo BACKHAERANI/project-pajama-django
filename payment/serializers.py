@@ -21,7 +21,6 @@ class Payment_detailCreateSerializer(serializers.ModelSerializer):
         model = Payment_detail
         fields = "__all__"
 
-
 class Review_Payment_DetailField(serializers.RelatedField):
     def to_representation(self, value):
         payment_detail_num = value.payment_detial_num
