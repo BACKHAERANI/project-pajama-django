@@ -17,6 +17,11 @@ class UserPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 1
 
+    def paginate_queryset(self, queryset, request, view=None):
+        if "all" in request.query_params:
+            return None
+        return super().paginate_queryset(queryset, request, view)
+
 
 class UserAPIView(CreateAPIView):
     queryset = User.objects.all()
