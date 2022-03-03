@@ -1,9 +1,13 @@
 from rest_framework import serializers
-
 from clothes.models import Clothes
 from clothes.serializers import ClothesSerializer
 from payment.models import Payment, Payment_detail
 from review.models import Review
+
+
+
+
+
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,14 +22,21 @@ class Payment_detailCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class Review_Payment_DetailField(serializers.RelatedField):
+    def to_representation(self, value):
+        payment_detail_num = value.payment_detial_num
+
+        return {"review_num": payment_detail_num}
+
 
 class Payment_detailSerializer(serializers.ModelSerializer):
     clothes_num = ClothesSerializer(read_only=True)
     payment_num = PaymentSerializer(read_only=True)
 
+
     class Meta:
         model = Payment_detail
-        fields = "__all__"
+        fields = ["payment_detail_num","clothes_num", "payment_num", "review"]
         depth = 1
 
     # def to_representation(self, obj):
@@ -37,7 +48,7 @@ class Payment_detailSerializer(serializers.ModelSerializer):
     #             representation[key] = clothes_num_representation[key]
     #
     #     return representation
-
+    #
     # def to_internal_value(self, data):
     #     """Move fields related to profile to their own profile dictionary."""
     #     payment_num_internal = {}
@@ -48,6 +59,7 @@ class Payment_detailSerializer(serializers.ModelSerializer):
     #     internal = super().to_internal_value(data)
     #     internal['profile'] = payment_num_internal
     #     return internal
+
 
 
 class Payment_DetailReviewSerializer(serializers.ModelSerializer):
