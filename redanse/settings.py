@@ -60,10 +60,10 @@ INSTALLED_APPS = [
     'qna',
 ]
 
-if DEBUG:
-    INSTALLED_APPS += [
-        "debug_toolbar",
-    ]
+# if DEBUG:
+#     INSTALLED_APPS += [
+#         "debug_toolbar",
+#     ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,10 +76,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
-    MIDDLEWARE = [
-        "debug_toolbar.middleware.DebugToolbarMiddleware"
-    ] + MIDDLEWARE
+# if DEBUG:
+#     MIDDLEWARE = [
+#         "debug_toolbar.middleware.DebugToolbarMiddleware"
+#     ] + MIDDLEWARE
 
 ROOT_URLCONF = 'redanse.urls'
 
@@ -106,16 +106,16 @@ WSGI_APPLICATION = 'redanse.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     # mariadb setting
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'redanse',  # DB 이름
-    #     'USER': 'root',
-    #     'PASSWORD': '1234',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306'
-    # }
-    'default': env.db(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+    'default': {
+        # mariadb setting
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pajama_db',  # DB 이름
+        'USER': 'pajama_user',
+        'PASSWORD': '1234',
+        'HOST': 'api.domain.com',
+        'PORT': '3306'
+    }
+    # 'default': env.db(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
 }
 
 # Password validation
@@ -166,7 +166,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS",
                                 default=["http://localhost:3000"])
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
