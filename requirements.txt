@@ -1,9 +1,1 @@
-django~=3.2.0
-pillow
-djangorestframework
-django-cors-headers
-djangorestframework-simplejwt
-django-environ
-black
-django-debug-toolbar
-mysqlclient
+-r requirements/prod.txt

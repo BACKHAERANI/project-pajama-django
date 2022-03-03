@@ -11,23 +11,31 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = Env()
+
+dot_env_path = BASE_DIR / ".env"
+if dot_env_path.exists():
+    with dot_env_path.open(encoding="utf-8") as f:
+        env.read_env(f, overwrite=True)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z*l%a&8fthm1s^v%ed1&43pm+vfmgx4ui$rxcz6d(8@t7wusd('
+SECRET_KEY = env.str("SECRET_KEY", default="---- SECRET KEY ----")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 
 # Application definition
@@ -98,15 +106,16 @@ WSGI_APPLICATION = 'redanse.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        # mariadb setting
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'redanse',  # DB 이름
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '3306'
-    }
+    # 'default': {
+    #     # mariadb setting
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'redanse',  # DB 이름
+    #     'USER': 'root',
+    #     'PASSWORD': '1234',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306'
+    # }
+    'default': env.db(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
 }
 
 # Password validation
@@ -146,12 +155,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS",
+                                default=["http://localhost:3000"])
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
@@ -160,6 +173,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.User'
 
+ACCESS_TOKEN_LIFETIME_DAYS = env.int("ACCESS_TOKEN_LIFETIME_DAYS", default=0)
+ACCESS_TOKEN_LIFETIME_HOURS = env.int("ACCESS_TOKEN_LIFETIME_HOURS", default=4)
+ACCESS_TOKEN_LIFETIME_MINUTES = env.int("ACCESS_TOKEN_LIFETIME_MINUTES", default=0)
 
 # django-rest-framework
 REST_FRAMEWORK = {
@@ -168,12 +184,12 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=ACCESS_TOKEN_LIFETIME_HOURS,),
+
 
 }
 
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'user_id',
-    # default 만료시간: 7시간
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=7),
 }
 
