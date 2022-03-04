@@ -112,7 +112,7 @@ DATABASES = {
         'NAME': 'redanse',  # DB 이름
         'USER': 'redanse_user',
         'PASSWORD': 'PAJAMA',
-        'HOST': 'db.haeran.com',
+        'HOST': 'mariadb.growing-apc.com',
         'PORT': '3306'
     }
     # 'default': env.db(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
