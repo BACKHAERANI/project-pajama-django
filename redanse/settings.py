@@ -109,10 +109,10 @@ DATABASES = {
     'default': {
         # mariadb setting
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pajama_db',  # DB 이름
-        'USER': 'pajama_user',
-        'PASSWORD': '1234',
-        'HOST': 'api.domain.com',
+        'NAME': 'redanse',  # DB 이름
+        'USER': 'redanse_user',
+        'PASSWORD': 'PAJAMA',
+        'HOST': 'api.haeran.com',
         'PORT': '3306'
     }
     # 'default': env.db(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
